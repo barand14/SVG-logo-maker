@@ -1,7 +1,6 @@
 const inquirer = require('inquirer');
-const generateMarkdown = require('./lib/generateMarkdown.js');
 const fs = require('fs');
-const svg = require('@svgdotjs/svg.js');
+//const svg = require('@svgdotjs/svg.js');
 const { default: Choices } = require('inquirer/lib/objects/choices.js');
 const {Circle, Square, Triangle} = require("./lib/shape.js")
 
@@ -23,13 +22,13 @@ const questions = [
 {
     type: 'input',
     name: 'textColor',
-    message:'Text color?',
+    message:'Text color?'
 },
 {
     type: 'list',
     name: 'shape',
     message: 'Logo shape?',
-    Choices: ["triangle", "circle", "square"],
+    choices: ["triangle", "circle", "square"],
 },
 {
     type: 'input',
@@ -37,3 +36,29 @@ const questions = [
     message: 'Shape color?',
 }
 ];
+
+
+function init(){
+    inquirer.prompt (questions)
+    .then(response =>{
+        //console.log(response)
+        let newShape;
+
+        if(response.shape === "circle"){
+            newShape = new Circle(response.shapecolor)
+        }
+       else if(response.shape === "square"){
+        newShape = new Square(response.shapecolor)
+        }
+        else {
+            newShape = new Triangle(response.shapecolor)
+        }
+
+    })
+}
+
+
+
+
+
+init()
