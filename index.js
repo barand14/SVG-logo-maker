@@ -3,12 +3,13 @@ const generateMarkdown = require('./lib/generateMarkdown.js');
 const fs = require('fs');
 const svg = require('@svgdotjs/svg.js');
 const { default: Choices } = require('inquirer/lib/objects/choices.js');
+const {Circle, Square, Triangle} = require("./lib/shape.js")
 
 const questions = [
 {
     type: 'input',
-    message:'Logo text?',
     name: 'text',
+    message:'Logo text?',
     validate:function(input){
         const done = this.async();
         setTimeout(() => {
@@ -21,18 +22,18 @@ const questions = [
 },
 {
     type: 'input',
-    message:'Text color?',
     name: 'textColor',
+    message:'Text color?',
 },
 {
     type: 'list',
-    Choices: ["circle", "triangle", "square"],
-    message: 'Logo shape?'
     name: 'shape',
+    message: 'Logo shape?',
+    Choices: ["triangle", "circle", "square"],
 },
 {
     type: 'input',
-    message: 'Shape color?',
     name: 'shapecolor',
+    message: 'Shape color?',
 }
 ];
